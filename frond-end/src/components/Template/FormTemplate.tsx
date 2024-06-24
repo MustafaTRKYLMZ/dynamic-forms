@@ -103,10 +103,12 @@ export const FormTemplate: React.FC = () => {
               <option value="location">Location</option>
             </select>
 
-            <MdDeleteForever
+            <button
               onClick={() => handleDelete(index)}
               className="removeButton"
-            />
+            >
+              <MdDeleteForever />
+            </button>
           </div>
         ))}
       </div>

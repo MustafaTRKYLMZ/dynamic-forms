@@ -154,14 +154,17 @@ button:hover {
   height: 50px;
 }
 .removeButton {
-  color: #d61111;
+  display: flex;
+  background: none;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  color: #ff3333;
   font-size: 2rem;
-
-  height: 50px;
   width: 50px;
+  height: 50px;
 }
 .removeButton:hover {
   background-color: #ff3333;
