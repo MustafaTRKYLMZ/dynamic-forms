@@ -1,22 +1,14 @@
 import React, { useState } from "react";
-// import axios from "axios";
 import { useForm } from "../../contexts/FormContext";
 import { MdDeleteForever } from "react-icons/md";
+import { Field } from "../../types";
 
 export const FormTemplate: React.FC = () => {
   const { addTemplate } = useForm();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [fields, setFields] = useState<
-    {
-      label: string;
-      type: string;
-      value?: string;
-      error?: string;
-      githubData?: any;
-    }[]
-  >([]);
+  const [fields, setFields] = useState<Field[]>([]);
 
   const addField = () => {
     setFields([...fields, { label: "", type: "text" }]);
@@ -32,14 +24,6 @@ export const FormTemplate: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const hasGitHubError = fields.some(
-      (field) => field.type === "github" && field.error
-    );
-    if (hasGitHubError) {
-      alert("Please enter valid GitHub usernames.");
-      return;
-    }
-
     const newTemplate = {
       id: Date.now().toString(),
       title,
@@ -94,15 +78,12 @@ export const FormTemplate: React.FC = () => {
             >
               <option value="text">Text</option>
               <option value="email">Email</option>
-              <option value="file">File</option>
               <option value="number">Number</option>
               <option value="phone">Phone</option>
-              <option value="select">Select</option>
               <option value="textarea">Textarea</option>
               <option value="date">Date</option>
               <option value="location">Location</option>
             </select>
-
             <button
               onClick={() => handleDelete(index)}
               className="removeButton"
