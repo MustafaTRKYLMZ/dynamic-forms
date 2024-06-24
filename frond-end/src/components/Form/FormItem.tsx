@@ -1,17 +1,7 @@
 import React from "react";
 import { LocationInput } from "./LocationInput";
-
-interface FormItemProps {
-  label: string;
-  type: string;
-  value: string;
-  handleChange: (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => void;
-  handleLocation?: (name: string, value: string) => void;
-}
+import { PhoneInput } from "./PhoneInput";
+import { FormItemProps } from "../../types";
 
 export const FormItem: React.FC<FormItemProps> = ({
   label,
@@ -19,17 +9,21 @@ export const FormItem: React.FC<FormItemProps> = ({
   value,
   handleChange,
   handleLocation,
+  handlePhone,
 }) => {
   if (type === "location") {
     return (
       <LocationInput
         label={label}
-        value={value}
+        value={value || ""}
         handleLocation={handleLocation}
       />
     );
   }
-
+  if (type === "phone") {
+    if (!handlePhone) throw new Error("handlePhone is required for phone type");
+    return <PhoneInput label={label} handlePhone={handlePhone} />;
+  }
   return (
     <div className="formDetailField">
       <label>{label}</label>

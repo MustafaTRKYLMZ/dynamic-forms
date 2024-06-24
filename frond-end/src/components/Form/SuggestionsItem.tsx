@@ -1,20 +1,21 @@
+// SuggestionsItem.tsx
 import React, { FC } from "react";
 
-export type SuggestionsItemProps = {
+export interface SuggestionsItemProps {
   type: string;
   name: string;
   placeholder: string;
-  value: string;
+  query: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   suggestions: string[];
   handleSuggestionClick: (suggestion: string, name: string) => void;
-};
+}
 
 export const SuggestionsItem: FC<SuggestionsItemProps> = ({
   type,
   name,
   placeholder,
-  value,
+  query,
   onChange,
   suggestions,
   handleSuggestionClick,
@@ -25,7 +26,7 @@ export const SuggestionsItem: FC<SuggestionsItemProps> = ({
         type={type}
         name={name}
         placeholder={placeholder}
-        value={value}
+        value={query}
         onChange={onChange}
       />
       {suggestions.length > 0 && (

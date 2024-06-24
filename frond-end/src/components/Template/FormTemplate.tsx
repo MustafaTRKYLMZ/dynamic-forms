@@ -96,12 +96,10 @@ export const FormTemplate: React.FC = () => {
               <option value="email">Email</option>
               <option value="file">File</option>
               <option value="number">Number</option>
-              <option value="checkbox">Checkbox</option>
-              <option value="radio">Radio</option>
+              <option value="phone">Phone</option>
               <option value="select">Select</option>
               <option value="textarea">Textarea</option>
               <option value="date">Date</option>
-              <option value="time">Time</option>
               <option value="location">Location</option>
             </select>
 
@@ -109,41 +107,6 @@ export const FormTemplate: React.FC = () => {
               onClick={() => handleDelete(index)}
               className="removeButton"
             />
-
-            {/* {field.type === "github" && (
-              <div>
-                <input
-                  type="text"
-                  value={field.value || ""}
-                  onChange={(e) =>
-                    handleGitHubUsernameChange(index, e.target.value)
-                  }
-                  placeholder="GitHub Username"
-                />
-
-                {field.githubData && (
-                  <div>
-                    <h3>GitHub User Info</h3>
-                    <p>
-                      <strong>Username:</strong> {field.githubData.login}
-                    </p>
-                    <p>
-                      <strong>Name:</strong> {field.githubData.name}
-                    </p>
-                    <p>
-                      <strong>Public Repos:</strong>{" "}
-                      {field.githubData.public_repos}
-                    </p>
-                    <p>
-                      <strong>Followers:</strong> {field.githubData.followers}
-                    </p>
-                    <p>
-                      <strong>Following:</strong> {field.githubData.following}
-                    </p>
-                  </div>
-                )}
-              </div>
-            )} */}
           </div>
         ))}
       </div>

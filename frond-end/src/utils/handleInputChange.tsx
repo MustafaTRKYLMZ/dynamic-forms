@@ -1,39 +1,28 @@
 import { fetchSuggestions } from "../api/fetchSuggestions";
+import { debounce } from "./debounce";
+export const handleInputChange = debounce(
+  async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setQuery: React.Dispatch<React.SetStateAction<string>>,
+    setSuggestions: React.Dispatch<React.SetStateAction<string[]>>,
+    onChange: (value: string) => void
+  ) => {
+    const { value } = e.target;
+    console.log("value: ", value);
+    setQuery(value);
+    console.log("suggessetQuerytions: ", setQuery);
+    console.log("value outside: ", value);
+    if (value.length < 3) {
+      console.log("value: ", value);
+      setSuggestions([]);
+      return;
+    }
 
-export const handleInputChange = async (
-  e: React.ChangeEvent<HTMLInputElement>,
-  field: string,
-  setCountry: React.Dispatch<React.SetStateAction<string>>,
-  setCity: React.Dispatch<React.SetStateAction<string>>,
-  setStreet: React.Dispatch<React.SetStateAction<string>>,
-  setCountrySuggestions: React.Dispatch<React.SetStateAction<string[]>>,
-  setCitySuggestions: React.Dispatch<React.SetStateAction<string[]>>,
-  setStreetSuggestions: React.Dispatch<React.SetStateAction<string[]>>,
-
-  country?: string,
-  city?: string,
-  street?: string
-) => {
-  const { value } = e.target;
-
-  if (field === "country") {
-    setCountry(value);
-    setCity("");
-    setStreet("");
-    setCountrySuggestions([]);
-    setCitySuggestions([]);
-    setStreetSuggestions([]);
     const suggestions = await fetchSuggestions(value);
-    setCountrySuggestions(suggestions);
-  } else if (field === "city") {
-    setCity(value);
-    setStreet("");
-    setStreetSuggestions([]);
-    const suggestions = await fetchSuggestions(value, country);
-    setCitySuggestions(suggestions);
-  } else if (field === "street") {
-    setStreet(value);
-    const suggestions = await fetchSuggestions(value, country, city, street);
-    setStreetSuggestions(suggestions);
-  }
-};
+    console.log("suggestions: ", suggestions);
+    setSuggestions(suggestions);
+
+    onChange(value);
+  },
+  100
+);
