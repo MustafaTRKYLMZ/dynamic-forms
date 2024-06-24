@@ -17,6 +17,14 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+input {
+  width: 100%;
+  padding: 8px;
+
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
 
 @keyframes logo-spin {
   from {
@@ -39,4 +47,43 @@
 
 .read-the-docs {
   color: #888;
+}
+label {
+  font-weight: bold;
+  margin-right: 1em;
+}
+textarea {
+  height: 5em;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+tbody {
+  border-top: 1px solid #ddd;
+}
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+thead {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  background-color: #f8f8f8;
+}
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+tr {
+  border-bottom: 1px solid #ddd;
+  width: 1rem;
+  gap: 1rem;
+  text-align: left;
+}
+td {
+  padding: 1ch;
+}
+td,
+th {
+  padding: 0.5rem;
 }
