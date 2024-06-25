@@ -144,28 +144,95 @@ button:hover {
   justify-content: center;
   gap: 0.5rem;
 }
+.formTemplateFieldContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
 .formTemplateField {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border-radius: 4px;
+  height: auto;
+  width: 100%;
+}
+.formTemplateFieldSelect {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.3rem;
+  border-radius: 4px;
+  height: auto;
+  width: 100%;
+}
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.optionItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
   border-radius: 4px;
-  height: 50px;
+  background-color: #f9f9f9;
+  padding: 0.5rem;
 }
-.removeButton {
+.optionsInput {
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: 50px;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #ff3333;
+}
+.optionsInput input[type="text"] {
+  width: 100%;
+}
+
+.optionsInput select {
+  width: 50%;
+}
+.optionsInput button {
+  width: 30%;
   background: none;
+}
+
+.addButton .removeButton {
+  display: flex;
   border: none;
   cursor: pointer;
   padding: 0;
   align-items: center;
   justify-content: center;
-  color: #ff3333;
-  font-size: 2rem;
+  font-size: 1.5rem;
   width: 50px;
   height: 50px;
 }
+.addButton:hover {
+  background-color: #007bff;
+  color: #ddd;
+}
+.addButton {
+  background: none;
+  color: #0056b3;
+}
+.removeButton {
+  background: none;
+  color: #ff3333;
+}
+
 .removeButton:hover {
   background-color: #ff3333;
   color: #ddd;
@@ -173,7 +240,7 @@ button:hover {
 .templateBody {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 1rem;
 }
 .templateBody select {
   width: 50%;

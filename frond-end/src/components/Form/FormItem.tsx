@@ -7,6 +7,7 @@ export const FormItem: React.FC<FormItemProps> = ({
   label,
   type,
   value,
+  options,
   handleChange,
   handleLocation,
   handlePhone,
@@ -24,6 +25,23 @@ export const FormItem: React.FC<FormItemProps> = ({
     if (!handlePhone) throw new Error("handlePhone is required for phone type");
     return <PhoneInput label={label} handlePhone={handlePhone} />;
   }
+
+  if (type === "select") {
+    return (
+      <div className="formDetailField">
+        <label>{label}</label>
+        <select name={label} value={value} onChange={handleChange}>
+          <option value="">Select an option</option>
+          {options?.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+
   return (
     <div className="formDetailField">
       <label>{label}</label>

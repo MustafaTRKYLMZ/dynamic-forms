@@ -32,8 +32,6 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
   };
 
   const handleSubmit = () => {
-    console.log("form data", formData);
-    console.log("template", template.fields);
     if (Object.keys(formData).length !== template.fields.length) {
       alert("Please fill all fields");
       return;
@@ -66,7 +64,6 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
   };
 
   const handleField = (label: string, field: string) => {
-    console.log("handle field", label, field);
     setFormData({
       ...formData,
       [label]: field,
@@ -81,6 +78,7 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
             key={index}
             label={field.label}
             type={field.type}
+            options={field.options}
             value={formData[field.label] || ""}
             handleChange={handleChange}
             handleLocation={handleField}

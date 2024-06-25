@@ -3,5 +3,5 @@ export type Field = {
   type: string;
   value?: string;
   error?: string;
-  githubData?: any;
+  options?: string[];
 };
