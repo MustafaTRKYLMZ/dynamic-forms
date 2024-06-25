@@ -6,6 +6,6 @@ export const fetchCountryCodes = async (): Promise<string[]> => {
     throw new Error("Error fetching countries");
   }
   const countriesData = response.data;
-  console.log("countriesData>>>>", countriesData[5]);
+
   return countriesData;
 };

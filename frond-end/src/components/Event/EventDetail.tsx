@@ -20,15 +20,14 @@ export const EventDetail = () => {
   const fields = selectedEvent.fields;
 
   // Get unique keys for table headers
-  const headers = [...new Set(fields.flatMap(Object.keys))];
-
+  const headers = [...new Set(fields.flatMap(Object.keys))].filter(
+    (key) => key !== "error"
+  );
   return (
     <div className="eventDetailPage">
       <h2>Event Detail</h2>
       <div>{fields?.length === 0 && <p>No fields found for this event</p>}</div>
-
       <div className="tableContainer">
-        {" "}
         <table>
           <thead>
             <tr>

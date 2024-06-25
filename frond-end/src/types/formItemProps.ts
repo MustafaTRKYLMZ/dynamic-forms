@@ -12,7 +12,8 @@ export type FormItemProps = {
   value?: string;
   disabled?: boolean;
   handleLocation?: (name: string, value: string) => void;
-  handlePhone?: (label: string, phoneNumber: string) => void;
+  handlePhone?: (label: string, fullPhoneNumber: string) => void;
   options?: string[];
   handleOptions?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  isSubmitted?: boolean;
 };

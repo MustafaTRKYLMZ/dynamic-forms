@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Event } from "../types";
 import { EventContextProps } from "../types/eventContext";
+import { mockEvents } from "../mock";
 
 const EventContext = createContext<EventContextProps | undefined>(undefined);
 
@@ -11,9 +12,11 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const eventsData = localStorage.getItem("events");
-    console.log("eventsData", eventsData);
+
     if (eventsData) {
       setEvents(JSON.parse(eventsData));
+    } else {
+      setEvents(mockEvents);
     }
   }, []);
 

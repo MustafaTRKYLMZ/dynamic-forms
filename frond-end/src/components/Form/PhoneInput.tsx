@@ -1,28 +1,37 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import { useCountryCodes } from "../../hooks";
 import { PhoneInputProps } from "../../types";
 
-export const PhoneInput: FC<PhoneInputProps> = ({ label, handleChange }) => {
+export const PhoneInput: FC<PhoneInputProps> = ({
+  label,
+  handlePhone,
+  isSubmitted,
+}) => {
   const countries = useCountryCodes();
   const [selectedCountryCode, setSelectedCountryCode] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
+  useEffect(() => {
+    if (isSubmitted) {
+      setSelectedCountryCode("");
+      setPhoneNumber("");
+    }
+  }, [isSubmitted]);
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCountryCode(e.target.value);
-    updateField(phoneNumber);
+    updateField(e.target.value, phoneNumber);
   };
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const phoneNumber = e.target.value;
-    setPhoneNumber(phoneNumber);
-    updateField(phoneNumber);
-    handleChange(e);
-  };
-  const updateField = (phoneNumber: string) => {
-    const fullPhoneNumber = `${selectedCountryCode}${phoneNumber}`;
-    if (fullPhoneNumber.length < 10) return;
 
-    setPhoneNumber(phoneNumber);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(e.target.value);
   };
+
+  const updateField = (countryCode: string, phone: string) => {
+    const fullPhoneNumber = `${countryCode}${phone}`;
+    handlePhone(label, fullPhoneNumber);
+  };
+
   return (
     <div className="phoneContainer">
       <label>{label}</label>

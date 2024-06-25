@@ -1,7 +1,6 @@
 import React, { FC, useState } from "react";
-import { SuggestionsItem } from "./SuggestionsItem";
-import { debounce } from "../../utils";
 import { fetchSuggestions } from "../../api";
+import { SuggestionsItem } from "./SuggestionsItem";
 
 export interface LocationInputProps {
   label: string;
@@ -29,14 +28,12 @@ export const LocationInput: FC<LocationInputProps> = ({
       setSuggestions([]);
       return;
     }
-
     const suggestions = await fetchSuggestions(inputValue);
     setSuggestions(suggestions);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-
     handleChange(value);
   };
 

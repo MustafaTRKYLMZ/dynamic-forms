@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "../../contexts/FormContext";
 import { MdAdd, MdDeleteForever } from "react-icons/md";
 import { Field } from "../../types";
 
-export const FormTemplate: React.FC = () => {
+export const CreateFormTemplate = () => {
   const { addTemplate } = useForm();
-
+  const [info, setInfo] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [fields, setFields] = useState<Field[]>([]);
@@ -15,6 +15,7 @@ export const FormTemplate: React.FC = () => {
 
   const addField = () => {
     setFields([...fields, { label: "", type: "text", options: [] }]);
+    setInfo("Field added successfully!");
   };
 
   const handleFieldChange = (
@@ -39,6 +40,7 @@ export const FormTemplate: React.FC = () => {
     setDescription("");
     setFields([]);
     setOptionsInputs({});
+    setInfo("Template created successfully!");
   };
 
   const handleDelete = (index: number) => {
@@ -50,12 +52,13 @@ export const FormTemplate: React.FC = () => {
     const newOptionsInputs = { ...optionsInputs };
     delete newOptionsInputs[index];
     setOptionsInputs(newOptionsInputs);
+    setInfo("Field removed successfully!");
   };
 
   const handleOptionsChange = (index: number, value: string) => {
     setOptionsInputs({ ...optionsInputs, [index]: value });
   };
-
+  //addd options to the select field
   const addOptions = (index: number) => {
     const newFields = [...fields];
     const optionsArray = (optionsInputs[index] || "")
@@ -69,8 +72,9 @@ export const FormTemplate: React.FC = () => {
 
     // Clear the input after adding options
     setOptionsInputs({ ...optionsInputs, [index]: "" });
+    setInfo("Options added successfully!");
   };
-
+  //delete option from the select field
   const deleteOption = (fieldIndex: number, optIndex: number) => {
     const newFields = [...fields];
     newFields[fieldIndex].options = newFields[fieldIndex].options?.filter(
@@ -78,10 +82,14 @@ export const FormTemplate: React.FC = () => {
     );
     setFields(newFields);
   };
-
+  //clear info message after 2 seconds
+  setTimeout(() => {
+    setInfo("");
+  }, 2000);
   return (
     <div className="template">
       <h2>Create Form Template</h2>
+      {info && <div className="info">{info}</div>}
       <input
         type="text"
         value={title}

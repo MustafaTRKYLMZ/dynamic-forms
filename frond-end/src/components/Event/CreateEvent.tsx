@@ -49,7 +49,6 @@ export const CreateEvent = () => {
       templateId: selectedTemplate,
       fields: [],
     };
-    console.log("Event:", newEvent);
 
     const events = localStorage.getItem("events");
     let currentEvents = [];

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { EventFormDetail } from "./EventFormDetail";
 import { useState } from "react";
+import { EventFormDetail } from "./EventFormDetail";
 
 export const EventPreview = () => {
   const [info, setInfo] = useState("");

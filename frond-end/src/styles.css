@@ -290,8 +290,8 @@ button:hover {
 .eventList {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
 }
 .error {
   color: #d61111;

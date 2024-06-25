@@ -11,7 +11,7 @@ export const fetchSuggestions = async (query: string) => {
       {
         params: {
           q: query,
-          key: "482b5c1567ef458fb31ee4e7e35f4a4b",
+          key: import.meta.env.VITE_API_KEY,
           limit: 5,
         },
       }

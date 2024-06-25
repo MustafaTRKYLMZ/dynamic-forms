@@ -1,7 +1,8 @@
 import React from "react";
+
+import { FormItemProps } from "../../types";
 import { LocationInput } from "./LocationInput";
 import { PhoneInput } from "./PhoneInput";
-import { FormItemProps } from "../../types";
 
 export const FormItem: React.FC<FormItemProps> = ({
   label,
@@ -10,6 +11,8 @@ export const FormItem: React.FC<FormItemProps> = ({
   options,
   handleChange,
   handleLocation,
+  handlePhone,
+  isSubmitted,
 }) => {
   if (type === "location") {
     return (
@@ -21,7 +24,13 @@ export const FormItem: React.FC<FormItemProps> = ({
     );
   }
   if (type === "phone") {
-    return <PhoneInput label={label} handleChange={handleChange} />;
+    return (
+      <PhoneInput
+        label={label}
+        handlePhone={handlePhone || (() => {})}
+        isSubmitted={isSubmitted || false}
+      />
+    );
   }
 
   if (type === "select") {

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "../../contexts/FormContext";
-import { FormItem } from "../Form/FormItem";
+import { FormItem } from "../form/FormItem";
 import { EventFormDetailProps } from "../../types";
 import { useEvent } from "../../contexts/EventContext";
 
@@ -11,6 +11,8 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
   setError,
 }) => {
   const { updateEvent } = useEvent();
+  const [isSumitted, setIsSubmitted] = useState(false);
+
   const { templates } = useForm();
   const template = templates.find((template) => template.id === templateId);
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
@@ -57,11 +59,15 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
       setError("Event not found");
       return;
     }
+
     // Save updated data back to local storage
     localStorage.setItem("events", JSON.stringify(currentData));
     updateEvent(currentData[eventIndex]);
     setInfo("Form submitted successfully!");
     setFormData({});
+
+    // Reset phone inputs
+    setIsSubmitted(true);
   };
 
   const handleField = (label: string, field: string) => {
@@ -73,19 +79,19 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
 
   return (
     <div className="formDetail">
-      {template?.fields.map((field, index) => {
-        return (
-          <FormItem
-            key={index}
-            label={field.label}
-            type={field.type}
-            options={field.options}
-            value={formData[field.label] || ""}
-            handleChange={handleChange}
-            handleLocation={handleField}
-          />
-        );
-      })}
+      {template.fields.map((field, index) => (
+        <FormItem
+          key={index}
+          label={field.label}
+          type={field.type}
+          options={field.options}
+          value={formData[field.label] || ""}
+          handleChange={handleChange}
+          handleLocation={handleField}
+          handlePhone={handleField}
+          isSubmitted={isSumitted}
+        />
+      ))}
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );

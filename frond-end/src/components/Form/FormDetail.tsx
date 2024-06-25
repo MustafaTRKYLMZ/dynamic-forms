@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useForm } from "../../contexts/FormContext";
 import { FormItem } from "./FormItem";
+import { useForm } from "../../contexts";
 
 export const FormDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [info, setInfo] = useState("");
   const { templates } = useForm();
   const template = templates.find((template) => template.id === id);
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
@@ -31,7 +32,7 @@ export const FormDetail: React.FC = () => {
       ...formData,
       templateId: template.id,
     };
-    // TODO add to backend
+
     const currentLocalStorage = localStorage.getItem("formValues");
     const currentData = currentLocalStorage
       ? JSON.parse(currentLocalStorage)
@@ -39,12 +40,16 @@ export const FormDetail: React.FC = () => {
 
     const updatedData = [...currentData, newData];
     localStorage.setItem("formValues", JSON.stringify(updatedData));
-    alert("Form submitted successfully!");
+    setInfo("Form submitted successfully!");
   };
-
+  setTimeout(() => {
+    setInfo("");
+  }, 3000);
   return (
     <div className="formDetail">
+      <h1>Form Template Preview</h1>
       <div className="formDetailHeader">
+        {info && <div className="info">{info}</div>}
         <h2>{template.title}</h2>
         <p>{template.description}</p>
       </div>
@@ -54,6 +59,7 @@ export const FormDetail: React.FC = () => {
           key={index}
           label={field.label}
           type={field.type}
+          options={field.options}
           value={formData[field.label] || ""}
           handleChange={handleChange}
         />

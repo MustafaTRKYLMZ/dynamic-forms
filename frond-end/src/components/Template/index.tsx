@@ -1,2 +1,2 @@
 export * from "./TemplateList";
-export * from "./FormTemplate";
+export * from "./CreateFormTemplate";
