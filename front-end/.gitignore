@@ -5,5 +5,5 @@
 *.njsproj
 *.sln
 *.sw?
-
+node_modules
 .env
