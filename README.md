@@ -5,7 +5,10 @@ You can use dynamic forms applications in your foundation or company for taking 
 ### Usage
 clone dynamic forms repo
 
+cd dynamic-forms/front-end
+
 run npm install or yarn install
 
-Live version
-....link (netlify)
+### Live version
+ [Demo](https://clinquant-tanuki-715fe9.netlify.app/)
+
