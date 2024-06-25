@@ -2,7 +2,7 @@ import React, { useState, FC } from "react";
 import { useCountryCodes } from "../../hooks";
 import { PhoneInputProps } from "../../types";
 
-export const PhoneInput: FC<PhoneInputProps> = ({ label, handlePhone }) => {
+export const PhoneInput: FC<PhoneInputProps> = ({ label, handleChange }) => {
   const countries = useCountryCodes();
   const [selectedCountryCode, setSelectedCountryCode] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -15,11 +15,12 @@ export const PhoneInput: FC<PhoneInputProps> = ({ label, handlePhone }) => {
     const phoneNumber = e.target.value;
     setPhoneNumber(phoneNumber);
     updateField(phoneNumber);
+    handleChange(e);
   };
   const updateField = (phoneNumber: string) => {
     const fullPhoneNumber = `${selectedCountryCode}${phoneNumber}`;
     if (fullPhoneNumber.length < 10) return;
-    handlePhone(label, fullPhoneNumber);
+
     setPhoneNumber(phoneNumber);
   };
   return (

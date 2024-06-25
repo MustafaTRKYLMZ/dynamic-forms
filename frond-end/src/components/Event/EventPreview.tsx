@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export const EventPreview = () => {
   const [info, setInfo] = useState("");
+  const [error, setError] = useState("");
   const location = useLocation();
   const { newEvent } = location.state || {
     newEvent: "",
@@ -12,9 +13,13 @@ export const EventPreview = () => {
   setTimeout(() => {
     setInfo("");
   }, 3000);
+  setTimeout(() => {
+    setError("");
+  }, 3000);
   return (
     <div className="eventForm">
       {info && <div className="info">{info}</div>}
+      {error && <div className="error">{error}</div>}
       <div className="eventDetailHeader">
         <h1>{newEvent.title}</h1>
         <h2>{newEvent.description}</h2>
@@ -23,6 +28,7 @@ export const EventPreview = () => {
         templateId={newEvent.templateId}
         eventId={newEvent.id}
         setInfo={setInfo}
+        setError={setError}
       />
     </div>
   );

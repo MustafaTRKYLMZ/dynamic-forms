@@ -1,4 +1,4 @@
 export type PhoneInputProps = {
   label: string;
-  handlePhone: (label: string, phoneNumber: string) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };

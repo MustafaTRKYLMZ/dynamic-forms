@@ -8,6 +8,7 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
   templateId,
   eventId,
   setInfo,
+  setError,
 }) => {
   const { updateEvent } = useEvent();
   const { templates } = useForm();
@@ -33,7 +34,7 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
 
   const handleSubmit = () => {
     if (Object.keys(formData).length !== template.fields.length) {
-      alert("Please fill all fields");
+      setError("Please fill all fields");
       return;
     }
 
@@ -53,7 +54,7 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
       currentData[eventIndex].fields = currentData[eventIndex].fields || [];
       currentData[eventIndex].fields.push(formData);
     } else {
-      alert("Event not found");
+      setError("Event not found");
       return;
     }
     // Save updated data back to local storage
@@ -82,7 +83,6 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
             value={formData[field.label] || ""}
             handleChange={handleChange}
             handleLocation={handleField}
-            handlePhone={handleField}
           />
         );
       })}
