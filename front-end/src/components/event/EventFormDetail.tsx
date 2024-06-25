@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "../../contexts/FormContext";
 import { FormItem } from "../form/FormItem";
 import { EventFormDetailProps } from "../../types";
