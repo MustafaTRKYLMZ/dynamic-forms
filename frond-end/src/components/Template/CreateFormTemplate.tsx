@@ -16,6 +16,10 @@ export const CreateFormTemplate = () => {
   const addField = () => {
     setFields([...fields, { label: "", type: "text", options: [] }]);
     setInfo("Field added successfully!");
+    //clear info message after 3 seconds
+    setTimeout(() => {
+      setInfo("");
+    }, 3000);
   };
 
   const handleFieldChange = (
@@ -53,6 +57,10 @@ export const CreateFormTemplate = () => {
     delete newOptionsInputs[index];
     setOptionsInputs(newOptionsInputs);
     setInfo("Field removed successfully!");
+    //clear info message after 3 seconds
+    setTimeout(() => {
+      setInfo("");
+    }, 3000);
   };
 
   const handleOptionsChange = (index: number, value: string) => {
@@ -73,6 +81,10 @@ export const CreateFormTemplate = () => {
     // Clear the input after adding options
     setOptionsInputs({ ...optionsInputs, [index]: "" });
     setInfo("Options added successfully!");
+    //clear info message after 3 seconds
+    setTimeout(() => {
+      setInfo("");
+    }, 3000);
   };
   //delete option from the select field
   const deleteOption = (fieldIndex: number, optIndex: number) => {
@@ -81,11 +93,13 @@ export const CreateFormTemplate = () => {
       (_, index) => index !== optIndex
     );
     setFields(newFields);
+    setInfo("Option removed successfully!");
+    //clear info message after 3 seconds
+    setTimeout(() => {
+      setInfo("");
+    }, 3000);
   };
-  //clear info message after 2 seconds
-  setTimeout(() => {
-    setInfo("");
-  }, 2000);
+
   return (
     <div className="template">
       <h2>Create Form Template</h2>

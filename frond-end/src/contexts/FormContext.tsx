@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { FormTemplate } from "../types";
 import { FormContextProps } from "../types/formContext";
 import { mockTemplates } from "../mock/mockTemplate";
+import { getItemFromLocalStorage, setItemToLocalStorage } from "../helpers";
 
 const FormContext = createContext<FormContextProps | undefined>(undefined);
 
@@ -11,23 +12,19 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
   const [templates, setTemplates] = useState<FormTemplate[]>([]);
 
   useEffect(() => {
-    const templatesData = localStorage.getItem("formTemplates");
-    const templatesFromLocal = templatesData ? JSON.parse(templatesData) : null;
-
-    if (templatesData) {
-      setTemplates(templatesFromLocal);
+    const templates = getItemFromLocalStorage("formTemplates");
+    if (templates.length > 0) {
+      setTemplates(templates);
     } else {
       setTemplates(mockTemplates);
     }
   }, []);
 
   const addTemplate = (template: FormTemplate) => {
-    setTemplates([...templates, template]);
-
-    localStorage.setItem(
-      "formTemplates",
-      JSON.stringify([...templates, template])
-    );
+    const templates = getItemFromLocalStorage("formTemplates");
+    const updatedTemplates = [...templates, template];
+    setItemToLocalStorage("formTemplates", updatedTemplates);
+    setTemplates(updatedTemplates);
   };
 
   return (

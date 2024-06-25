@@ -3,6 +3,7 @@ import { useForm } from "../../contexts/FormContext";
 import { FormItem } from "../form/FormItem";
 import { EventFormDetailProps } from "../../types";
 import { useEvent } from "../../contexts/EventContext";
+import { getItemFromLocalStorage } from "../../helpers";
 
 export const EventFormDetail: React.FC<EventFormDetailProps> = ({
   templateId,
@@ -41,11 +42,8 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
     }
 
     // Read current data from local storage
-    const currentLocalStorage = localStorage.getItem("events");
-    const currentData = currentLocalStorage
-      ? JSON.parse(currentLocalStorage)
-      : [];
 
+    const currentData = getItemFromLocalStorage("events");
     // Find the event to update
     const eventIndex = currentData.findIndex(
       (event: any) => event.id === eventId
@@ -60,8 +58,6 @@ export const EventFormDetail: React.FC<EventFormDetailProps> = ({
       return;
     }
 
-    // Save updated data back to local storage
-    localStorage.setItem("events", JSON.stringify(currentData));
     updateEvent(currentData[eventIndex]);
     setInfo("Form submitted successfully!");
     setFormData({});

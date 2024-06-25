@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../contexts/FormContext";
 import { Event } from "../../types";
 import { useEvent } from "../../contexts/EventContext";
+import { getItemFromLocalStorage, setItemToLocalStorage } from "../../helpers";
 
 export const CreateEvent = () => {
   const { addEvent } = useEvent();
@@ -50,20 +51,11 @@ export const CreateEvent = () => {
       fields: [],
     };
 
-    const events = localStorage.getItem("events");
-    let currentEvents = [];
-    try {
-      currentEvents = events ? JSON.parse(events) : [];
-      if (!Array.isArray(currentEvents)) {
-        currentEvents = [];
-      }
-    } catch (error) {
-      console.error("Failed to parse events from localStorage", error);
-      currentEvents = [];
-    }
+    const events = getItemFromLocalStorage("events");
 
-    const updatedEvents = [...currentEvents, newEvent];
-    localStorage.setItem("events", JSON.stringify(updatedEvents));
+    const updatedEvents = [...events, newEvent];
+    setItemToLocalStorage("events", updatedEvents);
+
     addEvent(newEvent);
     navigate(`/create-event/${newEvent.id}`, {
       state: { newEvent },

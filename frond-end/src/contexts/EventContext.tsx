@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Event } from "../types";
 import { EventContextProps } from "../types/eventContext";
 import { mockEvents } from "../mock";
+import { getItemFromLocalStorage, setItemToLocalStorage } from "../helpers";
 
 const EventContext = createContext<EventContextProps | undefined>(undefined);
 
@@ -11,26 +12,27 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    const eventsData = localStorage.getItem("events");
+    const eventsData = getItemFromLocalStorage("events");
 
-    if (eventsData) {
-      setEvents(JSON.parse(eventsData));
+    if (eventsData.length > 0) {
+      setEvents(eventsData);
     } else {
       setEvents(mockEvents);
     }
   }, []);
 
   const addEvent = (event: Event) => {
-    const updatedEvents = [...events, event];
-    setEvents(updatedEvents);
-    // localStorage.setItem("events", JSON.stringify(updatedEvents));
+    setEvents([event]);
   };
   const updateEvent = (updatedEvent: Event) => {
+    const events = getItemFromLocalStorage("events") as Event[];
     const updatedEvents = events.map((event) =>
       event.id === updatedEvent.id ? updatedEvent : event
     );
+
+    setItemToLocalStorage("events", updatedEvents);
+
     setEvents(updatedEvents);
-    localStorage.setItem("events", JSON.stringify(updatedEvents));
   };
   return (
     <EventContext.Provider value={{ events, addEvent, updateEvent }}>
