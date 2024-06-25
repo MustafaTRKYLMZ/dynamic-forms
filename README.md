@@ -7,7 +7,9 @@ clone dynamic forms repo
 
 cd dynamic-forms/front-end
 
-run npm install or yarn install
+run => npm install or yarn install
+
+run => yarn run dev
 
 ### Live version
  [Demo](https://clinquant-tanuki-715fe9.netlify.app/)
